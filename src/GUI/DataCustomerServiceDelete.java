@@ -18,7 +18,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Ariel
+ * @author Ariel Jayapermana
  */
 public class DataCustomerServiceDelete extends javax.swing.JPanel {
     private Connection conn;
@@ -31,8 +31,8 @@ public class DataCustomerServiceDelete extends javax.swing.JPanel {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
         initComponents();
-        jf=j;
         tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        jf=j;
     }
 
     /**
@@ -143,7 +143,11 @@ public class DataCustomerServiceDelete extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(jf.dcse);
+        try {
+            jf.setPanel(new DataCustomerServiceEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

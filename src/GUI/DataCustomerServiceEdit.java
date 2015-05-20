@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -153,19 +155,31 @@ public class DataCustomerServiceEdit extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(jf.dcsu1);
+        try {
+            jf.setPanel(new DataCustomerServiceUpdate1(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jf.setPanel(jf.dcsi);
+        try {
+            jf.setPanel(new DataCustomerServiceInsert(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jf.setPanel(jf.dcsd);
+        try {
+            jf.setPanel(new DataCustomerServiceDelete(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jf.setPanel(jf.dcs);
+        jf.setPanel(new DataCustomerService(jf));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /*

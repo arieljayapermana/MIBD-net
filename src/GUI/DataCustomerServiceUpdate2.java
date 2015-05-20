@@ -327,7 +327,11 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jf.setPanel(jf.dcse);
+        try {
+            jf.setPanel(new DataCustomerServiceEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     /*
     method show buat nampilin semua isi tabel
