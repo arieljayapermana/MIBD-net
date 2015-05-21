@@ -179,7 +179,11 @@ public class DataCustomerServiceEdit extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jf.setPanel(new DataCustomerService(jf));
+        try {
+            jf.setPanel(new DataCustomerService(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerServiceEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /*
