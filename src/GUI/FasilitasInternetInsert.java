@@ -197,13 +197,17 @@ public class FasilitasInternetInsert extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new FasilitasInternetEdit(jf));
+        try {
+            jf.setPanel(new FasilitasInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(FasilitasInternetInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ResultSet rs;       
         String nama=textFieldNama.getText();
-        rs=this.search("namaPaket", nama);
+        rs=this.search("nama", nama);
         if(nama.equals(""))
         {
             JOptionPane.showMessageDialog(null, "Masukan Nama Paket!!!");
@@ -272,6 +276,9 @@ public class FasilitasInternetInsert extends javax.swing.JPanel {
     */
     public void insertFasilitasInternet(String nama, String browsing, String mail, String sosmed, int sms, int telepon)
     {
+        browsing=browsing.toUpperCase();
+        mail=mail.toUpperCase();
+        sosmed=sosmed.toUpperCase();
         try
         {
             String query="INSERT INTO Fasilitas_Internet values('"+nama+"','"+browsing+"','"+mail+"','"+sosmed+"',";          
@@ -296,7 +303,7 @@ public class FasilitasInternetInsert extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            String query = "select * from Fasilitas_Internet where "+tipe+"="+input;
+            String query = "select * from Fasilitas_Internet where "+tipe+"='"+input+"'";
             
             rs = sta.executeQuery(query);
             /*while (rs.next()) 

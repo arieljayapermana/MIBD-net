@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -232,7 +234,11 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
+        try {
+            jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPerpanjanganPaketInternetUpdate1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public String getId()

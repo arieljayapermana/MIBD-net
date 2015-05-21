@@ -53,7 +53,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelDataPerpanjangan = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        buttonInsert = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         textFieldAkumulasi = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -89,10 +89,10 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tabelDataPerpanjangan);
 
-        jButton1.setText("INSERT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonInsert.setText("INSERT");
+        buttonInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonInsertActionPerformed(evt);
             }
         });
 
@@ -100,12 +100,6 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        textFieldAkumulasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAkumulasiActionPerformed(evt);
             }
         });
 
@@ -137,7 +131,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(buttonInsert)
                         .addGap(57, 57, 57)
                         .addComponent(jButton2))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -192,7 +186,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
                     .addComponent(textFieldAkumulasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(buttonInsert)
                     .addComponent(jButton2))
                 .addGap(89, 89, 89))
         );
@@ -282,17 +276,17 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         ResultSet rs;       
         String id=textFieldId.getText();
-        rs=this.search("idPelanggan", id);
+        rs=this.search("id", id);
         if(id.equals(""))
         {
             JOptionPane.showMessageDialog(null, "Masukan ID Pelanggan!!!");
         }
         else try 
         {
-            if(id.equals(rs.getString("idPelanggan")))
+            if(id.equals(rs.getString("id")))
             {
                 JOptionPane.showMessageDialog(null, "ID Pelanggan Sudah Ada!!!");
             }
@@ -323,14 +317,14 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         }
         this.insertDataHistori(id, nama, tanggal, kuotaTambahan, akumulasiKuota);
         tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void textFieldAkumulasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAkumulasiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAkumulasiActionPerformed
+    }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
+        try {
+            jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPerpanjanganPaketInternetInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 /*
     method show buat nampilin semua isi tabel
@@ -364,7 +358,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            String query = "select * from Data_Histori where "+tipe+"="+input;
+            String query = "select * from Data_Histori where "+tipe+"='"+input+"'";
             
             rs = sta.executeQuery(query);
             /*while (rs.next()) 
@@ -400,12 +394,12 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
             temp+=tanggalPerpanjang.substring(8, 10);
         }
         
-        String tambahan="'"+kuotaTambahan+" mb'";
-        String akumulasi="'"+akumulasiKuota+" mb'";
+        String tambahan=kuotaTambahan+" mb";
+        String akumulasi=akumulasiKuota+" mb";
         
         try
         {
-            String query="INSERT INTO Data_Histori values("+id+",'"+nama+"',"+temp+","+tambahan+","+akumulasi+")";
+            String query="INSERT INTO Data_Histori values('"+id+"','"+nama+"','"+temp+"','"+tambahan+"','"+akumulasi+"')";
             sta.executeQuery(query);              
         }
         catch (SQLException ex)
@@ -415,7 +409,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonInsert;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

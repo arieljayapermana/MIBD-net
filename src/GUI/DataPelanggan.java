@@ -175,7 +175,11 @@ public class DataPelanggan extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jf.setPanel(new DataPelangganEdit(jf));
+        try {
+            jf.setPanel(new DataPelangganEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public ResultSet showTabel()

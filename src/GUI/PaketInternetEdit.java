@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.proteanit.sql.DbUtils;
 
 /*
@@ -137,19 +139,35 @@ public class PaketInternetEdit extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jf.setPanel(new PaketInternetInsert(jf));
+        try {
+            jf.setPanel(new PaketInternetInsert(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new PaketInternetUpdate1(jf));
+        try {
+            jf.setPanel(new PaketInternetUpdate1(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jf.setPanel(new PaketInternet(jf));
+        try {
+            jf.setPanel(new PaketInternet(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jf.setPanel(new PaketInternetDelete(jf));
+        try {
+            jf.setPanel(new PaketInternetDelete(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     

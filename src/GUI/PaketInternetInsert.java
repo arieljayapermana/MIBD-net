@@ -161,14 +161,14 @@ public class PaketInternetInsert extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ResultSet rs;       
         String nama=textFieldNama.getText();
-        rs=this.search("namaPaket", nama);
+        rs=this.search("nama_paket", nama);              
         if(nama.equals(""))
         {
             JOptionPane.showMessageDialog(null, "Masukan Nama Paket!!!");
         }
         else try 
         {
-            if(nama.equals(rs.getString("nama")))
+            if(nama.equals(rs.getString("nama_paket")))
             {
                 JOptionPane.showMessageDialog(null, "Nama Paket Sudah Ada!!!");
             }
@@ -192,7 +192,11 @@ public class PaketInternetInsert extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new PaketInternetEdit(jf));
+        try {
+            jf.setPanel(new PaketInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
     public ResultSet showTabel()
     {
@@ -223,13 +227,9 @@ public class PaketInternetInsert extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            String query = "select * from Paket_Internet where "+tipe+"="+input;
+            String query = "select * from Paket_Internet where "+tipe+"='"+input+"'";
             
-            rs = sta.executeQuery(query);
-            /*while (rs.next()) 
-            {
-                System.out.println(rs.getString("title"));
-            }*/            
+            rs = sta.executeQuery(query);          
         }
         catch (SQLException ex)
         {

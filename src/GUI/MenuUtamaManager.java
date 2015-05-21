@@ -1,5 +1,9 @@
 package GUI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -150,15 +154,27 @@ public class MenuUtamaManager extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jf.setPanel(new PaketInternet(jf));
+        try {
+            jf.setPanel(new PaketInternet(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuUtamaManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new FasilitasInternet(jf));
+        try {
+            jf.setPanel(new FasilitasInternet(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuUtamaManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jf.setPanel(new DataCustomerService(jf));
+        try {
+            jf.setPanel(new DataCustomerService(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuUtamaManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -166,15 +182,27 @@ public class MenuUtamaManager extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        jf.setPanel(new DataPenggunaan(jf));
+        try {
+            jf.setPanel(new DataPenggunaan(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuUtamaManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jf.setPanel(new DataPelanggan(jf));
+        try {
+            jf.setPanel(new DataPelanggan(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuUtamaManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        jf.setPanel(new DataPerpanjanganPaketInternet(jf));
+        try {
+            jf.setPanel(new DataPerpanjanganPaketInternet(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuUtamaManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
 

@@ -208,7 +208,11 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new FasilitasInternetEdit(jf));
+        try {
+            jf.setPanel(new FasilitasInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(FasilitasInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

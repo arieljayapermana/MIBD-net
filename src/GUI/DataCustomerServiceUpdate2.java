@@ -22,7 +22,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     private Connection conn;
-    private Statement sta;
+    private Statement sta;    
     private DataCustomerServiceUpdate1 obj;
     JFrame jf;
     /**
@@ -31,12 +31,21 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     public DataCustomerServiceUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
-        obj=new DataCustomerServiceUpdate1(j);
+        obj=new DataCustomerServiceUpdate1(j);        
         initComponents();
         jf=j;
-        tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));        
+    }    
+    
+    public void tes() throws SQLException
+    {
+        ResultSet rs=this.search("nama",obj.getId());
+        textFieldNama.setText(rs.getString("nama"));
+        textFieldAlamat.setText(rs.getString("alamat"));
+        textFieldKelamin.setText(rs.getString("jenis_kelamin"));
+        textFieldTanggal.setText(rs.getString("tanggal_lahir"));
+        textFieldHp.setText(rs.getString("no_Hp"));
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,8 +57,6 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -69,25 +76,13 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         textFieldKelamin = new javax.swing.JTextField();
         textFieldTanggal = new javax.swing.JTextField();
         textFieldHp = new javax.swing.JTextField();
+        buttonPilih = new javax.swing.JButton();
 
         jPanel1.setMaximumSize(new java.awt.Dimension(800, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("DATA CUSTOMER SERVICE");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Nama", "Alamat", "Jenis Kelamin", "Tanggal Lahir", "No HP"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("Nama                   :");
 
@@ -136,6 +131,13 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
 
         jLabel12.setText("No HP                  :");
 
+        buttonPilih.setText("pilih");
+        buttonPilih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilihActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -149,31 +151,34 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jButton3))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel12)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldHp))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldTanggal))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldAlamat))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldNama))))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton3))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldHp))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldTanggal))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldAlamat))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldNama)))
+                                .addGap(79, 79, 79)
+                                .addComponent(buttonPilih)))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -186,7 +191,8 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPilih))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -237,13 +243,9 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(358, 358, 358)))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))))
+                .addContainerGap(317, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -255,9 +257,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(351, 351, 351)
                 .addComponent(jLabel2)
                 .addGap(43, 43, 43)
                 .addComponent(jLabel4)
@@ -337,12 +337,27 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
             Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
+        ResultSet rs2=this.search("nama",(String)tabelCS.getValueAt(tabelCS.getSelectedRow(), 0));
+        try {
+            textFieldNama.setText(rs2.getString("nama"));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerServiceUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            textFieldAlamat.setText(rs2.getString("alamat"));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerServiceUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilihActionPerformed
     /*
     method show buat nampilin semua isi tabel
     */
     public ResultSet showTabel()
     {
-        ResultSet rs=null;
+        ResultSet rs=null;        
         try
         {
             String query = "select * from Data_CS";
@@ -414,6 +429,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonPilih;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -428,9 +444,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable tabelCS;
     private javax.swing.JTextField textFieldAlamat;
     private javax.swing.JTextField textFieldHp;

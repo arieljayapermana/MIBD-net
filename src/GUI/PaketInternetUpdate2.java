@@ -194,7 +194,11 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new PaketInternetEdit(jf));
+        try {
+            jf.setPanel(new PaketInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public ResultSet showTabel()

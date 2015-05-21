@@ -24,7 +24,7 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
     String id;
     private Connection conn;
     private Statement sta;
-    JFrame jf;
+    JFrame jf;    
     /**
      * Creates new form DataCustomerServiceEdit
      */
@@ -34,7 +34,7 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
         initComponents();
         jf=j;
         tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-    }
+    }        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,6 +159,11 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
         else
         {                        
             this.id=(String)tabelCS.getValueAt(tabelCS.getSelectedRow(), 0);
+        }
+        try {
+            jf.setPanel(new DataCustomerServiceUpdate2(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     /*

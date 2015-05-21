@@ -332,7 +332,11 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_textFieldAkumulasiActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
+        try {
+            jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPerpanjanganPaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /*

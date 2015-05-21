@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -126,7 +128,11 @@ public class FasilitasInternetDelete extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new FasilitasInternetEdit(jf));
+        try {
+            jf.setPanel(new FasilitasInternetEdit(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(FasilitasInternetDelete.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -138,7 +144,7 @@ public class FasilitasInternetDelete extends javax.swing.JPanel {
         else
         {                        
             nama=(String)tabelFasilitasInternet.getValueAt(tabelFasilitasInternet.getSelectedRow(), 0);
-            this.delete("namaPaket", nama);
+            this.delete("nama", nama);
         }        
         tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_jButton1ActionPerformed

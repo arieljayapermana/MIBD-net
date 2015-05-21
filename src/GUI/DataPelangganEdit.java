@@ -187,19 +187,35 @@ public class DataPelangganEdit extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(new DataPelangganUpdate1(jf));
+        try {
+            jf.setPanel(new DataPelangganUpdate1(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelangganEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jf.setPanel(new DataPelangganInsert(jf));
+        try {
+            jf.setPanel(new DataPelangganInsert(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelangganEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jf.setPanel(new DataPelangganDelete(jf));
+        try {
+            jf.setPanel(new DataPelangganDelete(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelangganEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jf.setPanel(new DataPelanggan(jf));
+        try {
+            jf.setPanel(new DataPelanggan(jf));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelangganEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /*
