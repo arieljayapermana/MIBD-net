@@ -1,7 +1,6 @@
 package GUI;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -278,15 +277,15 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         ResultSet rs;       
-        String id=textFieldId.getText();
-        rs=this.search("id", id);
-        if(id.equals(""))
+        String temp=textFieldId.getText();
+        rs=this.search("id", temp);
+        /*if(temp.equals(""))
         {
             JOptionPane.showMessageDialog(null, "Masukan ID Pelanggan!!!");
         }
         else try 
         {
-            if(id.equals(rs.getString("id")))
+            if(temp.equals(rs.getString("id")))
             {
                 JOptionPane.showMessageDialog(null, "ID Pelanggan Sudah Ada!!!");
             }
@@ -294,7 +293,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         catch (SQLException ex) 
         {
             Logger.getLogger(PaketInternetInsert.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         String nama=textFieldNama.getText();
         if(nama.equals(""))
         {
@@ -315,7 +314,7 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Masukan Akumulasi Kuota");
         }
-        this.insertDataHistori(id, nama, tanggal, kuotaTambahan, akumulasiKuota);
+        this.insertDataHistori(temp, nama, tanggal, kuotaTambahan, akumulasiKuota);
         tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_buttonInsertActionPerformed
 
@@ -378,21 +377,20 @@ public class DataPerpanjanganPaketInternetInsert extends javax.swing.JPanel {
     */
     public void insertDataHistori(String id, String nama, String tanggalPerpanjang, int kuotaTambahan, int akumulasiKuota)
     {
-        char a=tanggalPerpanjang.charAt(2);
-        char b=tanggalPerpanjang.charAt(5);
+        String a=tanggalPerpanjang;
         String temp="";
-        if(a=='-')
+        if(tanggalPerpanjang.charAt(2)=='-')
         {            
             temp+=tanggalPerpanjang.substring(6, 10);
             temp+=tanggalPerpanjang.substring(3, 5);
             temp+=tanggalPerpanjang.substring(0, 2);
         }
-        if(b=='-')
+        /*else if(a.charAt(4)=='-')
         {
             temp+=tanggalPerpanjang.substring(0, 4);
             temp+=tanggalPerpanjang.substring(5, 7);
             temp+=tanggalPerpanjang.substring(8, 10);
-        }
+        }*/
         
         String tambahan=kuotaTambahan+" mb";
         String akumulasi=akumulasiKuota+" mb";
