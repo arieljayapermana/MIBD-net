@@ -34,6 +34,7 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
         sta = conn.createStatement();
         initComponents();
         jf=j;
+        //tess
         tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }
 
