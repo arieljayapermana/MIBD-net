@@ -18,18 +18,25 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class PaketInternetUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
+    private String inputTabel;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public PaketInternetUpdate2(JFrame j) throws SQLException {
+    public PaketInternetUpdate2(JFrame j, int indeks) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
+        inputTabel=(String)tabelPaketInternet.getValueAt(indeks, 0);
+        ResultSet rs=this.search("nama_paket", inputTabel);
+        textFieldNama.setText(rs.getString("nama_paket"));
+        textFieldHarga.setText(rs.getString("harga_paket"));
+        textFieldKuota.setText(rs.getString("Kuota"));
         initComponents();
         jf=j;
         tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
@@ -159,24 +166,24 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("namaPaket", PaketInternetUpdate1.class.getName());
+        ResultSet rs=this.search("nama_paket", inputTabel);
         int a=0,b=0,c=0;
         try {
-            if(!textFieldNama.getText().equals(rs.getString("namaPaket")))
+            if(!textFieldNama.getText().equals(rs.getString("nama_paket")))
             {
-                this.update("nama", rs.getString("namaPaket"), "nama", textFieldNama.getText());
+                this.update("nama", rs.getString("nama_paket"), "nama", textFieldNama.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 a=1;
             }
-            if(!textFieldHarga.getText().equals(rs.getString("hargaPaket")))
+            if(!textFieldHarga.getText().equals(rs.getString("harga_paket")))
             {
-                this.update("harga", rs.getString("hargaPaket"), "harga", textFieldHarga.getText());
+                this.update("harga", rs.getString("harga_paket"), "harga", textFieldHarga.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 b=1;
             }
-            if(!textFieldKuota.getText().equals(rs.getString("kuota")))
+            if(!textFieldKuota.getText().equals(rs.getString("Kutoa")))
             {
-                this.update("kuota", rs.getString("kuota"), "kuota", textFieldKuota.getText());
+                this.update("Kutoa", rs.getString("Kutoa"), "Kutoa", textFieldKuota.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 c=1;
             }
@@ -208,11 +215,7 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         {
             String query = "select * from Paket_Internet";
             
-            rs = sta.executeQuery(query);
-            /*while (rs.next()) 
-            {
-                System.out.println(rs.getString("title"));
-            }*/            
+            rs = sta.executeQuery(query);          
         }
         catch (SQLException ex)
         {
@@ -249,13 +252,9 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            String query = "select * from Paket_Internet where "+tipe+"="+input;
+            String query = "select * from Paket_Internet where "+tipe+"='"+input+"'";
             
-            rs = sta.executeQuery(query);
-            /*while (rs.next()) 
-            {
-                System.out.println(rs.getString("title"));
-            }*/            
+            rs = sta.executeQuery(query);            
         }
         catch (SQLException ex)
         {

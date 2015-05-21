@@ -8,7 +8,8 @@ package GUI;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class SignIn extends javax.swing.JPanel {
     

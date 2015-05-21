@@ -19,18 +19,27 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
+    private String inputTabel;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public DataPerpanjanganPaketInternetUpdate2(JFrame j) throws SQLException {
+    public DataPerpanjanganPaketInternetUpdate2(JFrame j, int indeks) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
+        inputTabel=(String)tabelDataPerpanjangan.getValueAt(indeks, 0);
+        ResultSet rs=this.search("id", inputTabel);
+        textFieldId.setText(rs.getString("id"));
+        textFieldNama.setText(rs.getString("nama"));
+        textFieldTanggal.setText(rs.getString("tanggal_Penggunaan"));
+        textFieldKuota.setText(rs.getString("kuota_Tambahan"));
+        textFieldAkumulasi.setText(rs.getString("akumulasi_Kuota"));
         initComponents();
         jf=j;
         tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
@@ -283,7 +292,7 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("namaPaket", PaketInternetUpdate1.class.getName());
+        ResultSet rs=this.search("nama", inputTabel);
         int a=0,b=0,c=0,d=0,e=0;
         try {            
             if(!textFieldId.getText().equals(rs.getString("id")))
@@ -292,27 +301,27 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 a=1;
             }
-            if(!textFieldNama.getText().equals(rs.getString("namaPaket")))
+            if(!textFieldNama.getText().equals(rs.getString("nama")))
             {
-                this.update("nama", rs.getString("namaPaket"), "nama", textFieldNama.getText());
+                this.update("nama", rs.getString("nama"), "nama", textFieldNama.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 b=1;
             }
-            if(!textFieldTanggal.getText().equals(rs.getString("tanggalPerpanjangan")))
+            if(!textFieldTanggal.getText().equals(rs.getString("tanggal_Penggunaan")))
             {
-                this.update("tanggalPerpanjangan", rs.getString("tanggalPerpanjangan"), "tanggalPerpanjangan", textFieldTanggal.getText());
+                this.update("tanggal_Penggunaan", rs.getString("tanggal_Penggunaan"), "tanggal_Penggunaan", textFieldTanggal.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 c=1;
             }
-            if(!textFieldKuota.getText().equals(rs.getString("kuotaTambahan")))
+            if(!textFieldKuota.getText().equals(rs.getString("kuota_Tambahan")))
             {
-                this.update("kuotaTambahan", rs.getString("kuotaTambahan"), "kuotaTambahan", textFieldKuota.getText());
+                this.update("kuota_Tambahan", rs.getString("kuota_Tambahan"), "kuota_Tambahan", textFieldKuota.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 d=1;
             }
-            if(!textFieldAkumulasi.getText().equals(rs.getString("akumulasiKuota")))
+            if(!textFieldAkumulasi.getText().equals(rs.getString("akumulasi_Kuota")))
             {
-                this.update("akumulasiKuota", rs.getString("akumulasiKuota"), "akumulasiKuota", textFieldAkumulasi.getText());
+                this.update("akumulasi_Kuota", rs.getString("akumulasi_Kuota"), "akumulasi_Kuota", textFieldAkumulasi.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 e=1;
             }

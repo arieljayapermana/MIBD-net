@@ -17,7 +17,8 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class JFrame extends javax.swing.JFrame {
     
@@ -73,14 +74,14 @@ public class JFrame extends javax.swing.JFrame {
         dcse=new DataCustomerServiceEdit(this);
         dcsi=new DataCustomerServiceInsert(this);
         dcsu1=new DataCustomerServiceUpdate1(this);
-        dcsu2=new DataCustomerServiceUpdate2(this);
+        dcsu2=new DataCustomerServiceUpdate2(this, 0);
         
         dpl=new DataPelanggan(this);
         dpld=new DataPelangganDelete(this);
         dple=new DataPelangganEdit(this);
         dpli=new DataPelangganInsert(this);
         dplu1=new DataPelangganUpdate1(this);
-        dplu2=new DataPelangganUpdate2(this);
+        dplu2=new DataPelangganUpdate2(this, 0);
         
         dpg=new DataPenggunaan(this);
         
@@ -89,21 +90,21 @@ public class JFrame extends javax.swing.JFrame {
         dppie=new DataPerpanjanganPaketInternetEdit(this);
         dppii=new DataPerpanjanganPaketInternetInsert(this);
         dppiu1=new DataPerpanjanganPaketInternetUpdate1(this);
-        dppiu2=new DataPerpanjanganPaketInternetUpdate2(this);
+        dppiu2=new DataPerpanjanganPaketInternetUpdate2(this, 0);
         
         fi=new FasilitasInternet(this);
         fid=new FasilitasInternetDelete(this);
         fie=new FasilitasInternetEdit(this);
         fii=new FasilitasInternetInsert(this);
         fiu1=new FasilitasInternetUpdate1(this);
-        fiu2=new FasilitasInternetUpdate2(this);
+        fiu2=new FasilitasInternetUpdate2(this, 0);
         
         pi=new PaketInternet(this);
         pid=new PaketInternetDelete(this);
         pie=new PaketInternetEdit(this);
         pii=new PaketInternetInsert(this);
         piu1=new PaketInternetUpdate1(this);
-        piu2=new PaketInternetUpdate2(this);
+        piu2=new PaketInternetUpdate2(this, 0);
         
         
         mucs=new MenuUtamaCustomerService(this);

@@ -18,21 +18,31 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
+    private String inputTabel;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public FasilitasInternetUpdate2(JFrame j) throws SQLException {
+    public FasilitasInternetUpdate2(JFrame j, int indeks) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
+        inputTabel=(String)tabelFasilitasInternet.getValueAt(indeks, 0);
+        ResultSet rs=this.search("nama", inputTabel);
+        textFieldNama.setText(rs.getString("nama"));
+        textFieldBrowsing.setText(rs.getString("browsing"));
+        textFieldMail.setText(rs.getString("mail"));
+        textFieldSosmed.setText(rs.getString("sosmed"));
+        textFieldSms.setText(rs.getString("sms"));
+        textFieldTelepon.setText(rs.getString("telepon"));
         initComponents();
         jf=j;
-        jTable1.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
 
     }
 
@@ -47,7 +57,7 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelFasilitasInternet = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -69,7 +79,7 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("FASILITAS INTERNET");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelFasilitasInternet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -80,7 +90,7 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
                 "Nama", "Browsing", "Mail", "Sosmed", "SMS", "Telepon"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelFasilitasInternet);
 
         jButton1.setText("UPDATE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -216,12 +226,12 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("namaPaket", PaketInternetUpdate1.class.getName());
+        ResultSet rs=this.search("nama", inputTabel);
         int a=0,b=0,c=0,d=0,e=0,f=0;
         try {
-            if(!textFieldNama.getText().equals(rs.getString("namaPaket")))
+            if(!textFieldNama.getText().equals(rs.getString("nama")))
             {
-                this.update("nama", rs.getString("namaPaket"), "nama", textFieldNama.getText());
+                this.update("nama", rs.getString("nama"), "nama", textFieldNama.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 a=1;
             }
@@ -263,7 +273,7 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jTable1.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
 public ResultSet showTabel()
@@ -295,7 +305,7 @@ public ResultSet showTabel()
         ResultSet rs=null;
         try
         {
-            String query = "select * from Fasilitas_Internet where "+tipe+"="+input;
+            String query = "select * from Fasilitas_Internet where "+tipe+"='"+input+"'";
             
             rs = sta.executeQuery(query);
             /*while (rs.next()) 
@@ -340,7 +350,7 @@ public ResultSet showTabel()
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelFasilitasInternet;
     private javax.swing.JTextField textFieldBrowsing;
     private javax.swing.JTextField textFieldMail;
     private javax.swing.JTextField textFieldNama;

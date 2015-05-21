@@ -18,10 +18,10 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
-    private String nama="";
     private Connection conn;
     private Statement sta;
     JFrame jf;
@@ -137,20 +137,21 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int temp=0;
         if(this.tabelFasilitasInternet.getSelectedRow()==-1)
         {
             JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
         }
         else
         {                        
-            this.nama=(String)tabelFasilitasInternet.getValueAt(tabelFasilitasInternet.getSelectedRow(), 0);
+            temp=tabelFasilitasInternet.getSelectedRow();
+        }
+        try {
+            jf.setPanel(new FasilitasInternetUpdate2(jf, temp));
+        } catch (SQLException ex) {
+            Logger.getLogger(FasilitasInternetUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    public String getNama()
-    {
-        return this.nama;
-    }
-    
     public ResultSet showTabel()
     {
         ResultSet rs=null;

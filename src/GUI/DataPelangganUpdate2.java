@@ -19,19 +19,28 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataPelangganUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
-    private DataPelangganUpdate1 obj=new DataPelangganUpdate1();
+    private String inputTabel;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public DataPelangganUpdate2(JFrame j) throws SQLException {
+    public DataPelangganUpdate2(JFrame j, int indeks) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
+        inputTabel=(String)tabelDataPelanggan.getValueAt(indeks, 0);
+        ResultSet rs=this.search("", inputTabel);
+        textFieldId.setText(rs.getString("id_Pelanggan"));
+        textFieldNama.setText(rs.getString("nama_Pelanggan"));
+        textFieldAlamat.setText(rs.getString("alamat"));
+        textFieldKelamin.setText(rs.getString("jenis_kelamin"));
+        textFieldTanggal.setText(rs.getString("tanggal_lahir"));
+        textFieldHp.setText(rs.getString("no_Hp"));
         initComponents();
         jf=j;
         //tess
@@ -251,7 +260,7 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("id_Pelanggan", obj.getId());
+        ResultSet rs=this.search("id_Pelanggan", inputTabel);
         int a=0,b=0,c=0,d=0,e=0,f=0;
         try {
             if(!textFieldId.getText().equals(rs.getString("id_Pelanggan")))

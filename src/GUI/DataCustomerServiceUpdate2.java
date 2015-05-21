@@ -18,34 +18,32 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Ariel
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;    
-    private DataCustomerServiceUpdate1 obj;
+    private String inputTabel;
     JFrame jf;
     /**
      * Creates new form DataCustomerServiceEdit
      */
-    public DataCustomerServiceUpdate2(JFrame j) throws SQLException {
+    public DataCustomerServiceUpdate2(JFrame j, int indeks) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
-        obj=new DataCustomerServiceUpdate1(j);        
+        inputTabel=(String)tabelCS.getValueAt(indeks, 0);
+        ResultSet rs=this.search("nama",inputTabel);
+        textFieldNama.setText(rs.getString("nama"));
+        textFieldAlamat.setText(rs.getString("alamat"));
+        textFieldKelamin.setText(rs.getString("jenis_kelamin"));
+        textFieldTanggal.setText(rs.getString("tanggal_lahir"));
+        textFieldHp.setText(rs.getString("no_Hp"));        
         initComponents();
         jf=j;
         tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));        
     }    
     
-    public void tes() throws SQLException
-    {
-        ResultSet rs=this.search("nama",obj.getId());
-        textFieldNama.setText(rs.getString("nama"));
-        textFieldAlamat.setText(rs.getString("alamat"));
-        textFieldKelamin.setText(rs.getString("jenis_kelamin"));
-        textFieldTanggal.setText(rs.getString("tanggal_lahir"));
-        textFieldHp.setText(rs.getString("no_Hp"));
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -286,7 +284,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("namaPaket", obj.getId());
+        ResultSet rs=this.search("namaPaket", inputTabel);
         int b=0,c=0,d=0,e=0,f=0;
         try {            
             if(!textFieldNama.getText().equals(rs.getString("namaP")))

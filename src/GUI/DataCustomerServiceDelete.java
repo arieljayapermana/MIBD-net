@@ -20,7 +20,8 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Ariel Jayapermana
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataCustomerServiceDelete extends javax.swing.JPanel {
     private Connection conn;

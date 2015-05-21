@@ -19,10 +19,10 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
-    private String id;
     private Connection conn;
     private Statement sta;
     JFrame jf;
@@ -35,7 +35,6 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
         initComponents();
         jf=j;
         tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-
     }
 
     /**
@@ -223,13 +222,19 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int temp=0;
         if(this.tabelDataPerpanjangan.getSelectedRow()==-1)
         {
             JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
         }
         else
-        {                        
-            this.id=(String)tabelDataPerpanjangan.getValueAt(tabelDataPerpanjangan.getSelectedRow(), 0);
+        {                                    
+            temp=tabelDataPerpanjangan.getSelectedRow();
+        }
+        try {
+            jf.setPanel(new DataPerpanjanganPaketInternetUpdate2(jf, temp));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPerpanjanganPaketInternetUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -241,11 +246,6 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public String getId()
-    {
-        return this.id;
-    }
-    
     /*
     method show buat nampilin semua isi tabel
     */
@@ -268,7 +268,6 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
         }
         return rs;        
     }    
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

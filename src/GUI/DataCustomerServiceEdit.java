@@ -17,7 +17,8 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Ariel
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataCustomerServiceEdit extends javax.swing.JPanel {
     private Connection conn;

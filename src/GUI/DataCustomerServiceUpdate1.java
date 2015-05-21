@@ -18,10 +18,10 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Ariel
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
-    String id;
     private Connection conn;
     private Statement sta;
     JFrame jf;    
@@ -152,16 +152,17 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int temp=0;
         if(this.tabelCS.getSelectedRow()==-1)
         {
             JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
         }
         else
         {                        
-            this.id=(String)tabelCS.getValueAt(tabelCS.getSelectedRow(), 0);
+            temp=tabelCS.getSelectedRow();
         }
         try {
-            jf.setPanel(new DataCustomerServiceUpdate2(jf));
+            jf.setPanel(new DataCustomerServiceUpdate2(jf, temp));
         } catch (SQLException ex) {
             Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,11 +184,6 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
             System.out.println(ex.toString());
         }
         return rs;        
-    }
-    
-    public String getId()
-    {
-        return this.id;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

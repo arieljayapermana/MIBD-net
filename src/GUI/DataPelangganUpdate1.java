@@ -19,12 +19,12 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataPelangganUpdate1 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
-    private String id;
     JFrame jf;
     /**
      * Creates new form SignIn
@@ -37,11 +37,6 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
         tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }
 
-    public DataPelangganUpdate1()
-    {
-        
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,20 +185,22 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int temp=0;
         if(this.tabelDataPelanggan.getSelectedRow()==-1)
         {
             JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
         }
         else
-        {                        
-            this.id=(String)tabelDataPelanggan.getValueAt(tabelDataPelanggan.getSelectedRow(), 0);
+        {                                    
+            temp=tabelDataPelanggan.getSelectedRow();
+        }
+        try {
+            jf.setPanel(new DataPelangganUpdate2(jf, temp));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelangganUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    public String getId()
-    {
-        return this.id;
-    }
-    
+
     /*
     method show buat nampilin semua isi tabel
     */

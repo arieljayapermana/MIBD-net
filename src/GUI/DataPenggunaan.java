@@ -16,7 +16,8 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author i13050
+ * @author Christofer Indra Sinarya / 2013730042
+ *         Ariel Jayapermana / 2013730050
  */
 public class DataPenggunaan extends javax.swing.JPanel {
     private Connection conn;
