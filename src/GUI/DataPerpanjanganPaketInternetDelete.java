@@ -231,7 +231,7 @@ public class DataPerpanjanganPaketInternetDelete extends javax.swing.JPanel {
         {                        
             id=(String)tabelDataPerpanjangan.getValueAt(tabelDataPerpanjangan.getSelectedRow(), 0);
         }
-        this.delete("idPelanggan", id);
+        this.delete("id", id);
         tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
