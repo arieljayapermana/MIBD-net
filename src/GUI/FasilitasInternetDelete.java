@@ -19,12 +19,15 @@ import net.proteanit.sql.DbUtils;
  * @author i13050
  */
 public class FasilitasInternetDelete extends javax.swing.JPanel {
-
+    private Connection conn;
+    private Statement sta;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public FasilitasInternetDelete(JFrame j) {
+    public FasilitasInternetDelete(JFrame j) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
+        sta = conn.createStatement();
         initComponents();
         jf=j;
         tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
@@ -145,8 +148,6 @@ public ResultSet showTabel()
         ResultSet rs=null;
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-            Statement sta = conn.createStatement();
             String query = "select * from Fasilitas_Internet";
             
             rs = sta.executeQuery(query);
@@ -169,8 +170,6 @@ public ResultSet showTabel()
     {
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-            Statement sta = conn.createStatement();
             String query="DELETE from Fasilitas_Internet where "+tipe+"='"+input+"'";
             sta.executeQuery(query);              
         }

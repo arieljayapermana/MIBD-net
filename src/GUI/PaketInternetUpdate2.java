@@ -21,19 +21,18 @@ import net.proteanit.sql.DbUtils;
  * @author i13050
  */
 public class PaketInternetUpdate2 extends javax.swing.JPanel {
-
+    private Connection conn;
+    private Statement sta;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public PaketInternetUpdate2(JFrame j) {
+    public PaketInternetUpdate2(JFrame j) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
+        sta = conn.createStatement();
         initComponents();
         jf=j;
         tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-        ResultSet rs=this.search("NamaPaket", PaketInternetUpdate1.class.getName());
-//        textFieldNama.setText(rs.getString("Nama_Paket"));
-//        textFieldHarga.setText(rs.getString("hargaPaket"));
-//        textFieldKuota.setText(rs.getString("kuota"));
     }
 
     /**
@@ -203,8 +202,6 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-            Statement sta = conn.createStatement();
             String query = "select * from Paket_Internet";
             
             rs = sta.executeQuery(query);
@@ -230,8 +227,6 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
     {        
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-            Statement sta = conn.createStatement();
             String query="UPDATE Paket_Internet SET "+tipe+"='"+inputTipe+"' where "+tipe2+"='"+input+"'";
             sta.executeQuery(query);              
         }
@@ -250,8 +245,6 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-            Statement sta = conn.createStatement();
             String query = "select * from Paket_Internet where "+tipe+"="+input;
             
             rs = sta.executeQuery(query);

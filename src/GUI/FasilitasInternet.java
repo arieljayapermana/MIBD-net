@@ -18,12 +18,15 @@ import net.proteanit.sql.DbUtils;
  * @author i13050
  */
 public class FasilitasInternet extends javax.swing.JPanel {
-
+    private Connection conn;
+    private Statement sta;
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public FasilitasInternet(JFrame j) {
+    public FasilitasInternet(JFrame j) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
+        sta = conn.createStatement();
         initComponents();
         jf=j;
         jTable1.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
@@ -125,8 +128,6 @@ public class FasilitasInternet extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-            Statement sta = conn.createStatement();
             String query = "select * from Fasilitas_Internet";
             
             rs = sta.executeQuery(query);
