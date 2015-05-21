@@ -234,7 +234,7 @@ public class DataPerpanjanganPaketInternetDelete extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jf.setPanel(jf.dppie);
+        jf.setPanel(new DataPerpanjanganPaketInternetEdit(jf));
     }//GEN-LAST:event_jButton2ActionPerformed
 /*
     method show buat nampilin semua isi tabel
