@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -154,7 +156,9 @@ public class DataCustomerServiceDelete extends javax.swing.JPanel {
         String nama="";
         if(this.tabelCS.getSelectedRow()==-1)
         {
-            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
+            int x = JOptionPane.showConfirmDialog(jButton1, "Apakah anda yakin akan menghapus record ini?", "Delete", YES_NO_OPTION,QUESTION_MESSAGE);
+            
+//            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
         }
         else
         {                        
