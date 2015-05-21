@@ -193,7 +193,7 @@ public class DataPelangganDelete extends javax.swing.JPanel {
         {                        
             idPelanggan=(String)tabelDataPelanggan.getValueAt(tabelDataPelanggan.getSelectedRow(), 0);
         }
-        this.delete("idPelanggan", idPelanggan);
+        this.delete("id_Pelanggan", idPelanggan);
         tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_jButton1ActionPerformed
 

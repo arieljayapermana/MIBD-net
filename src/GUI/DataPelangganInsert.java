@@ -256,14 +256,14 @@ public class DataPelangganInsert extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ResultSet rs;       
         String id=textFieldNama.getText();
-        rs=this.search("idPelanggan", id);
+        rs=this.search("id_Pelanggan", id);
         if(id.equals(""))
         {
             JOptionPane.showMessageDialog(null, "Masukan Nama Paket!!!");
         }
         else try 
         {
-            if(id.equals(rs.getString("idPelanggan")))
+            if(id.equals(rs.getString("id_Pelanggan")))
             {
                 JOptionPane.showMessageDialog(null, "Nama Paket Sudah Ada!!!");
             }

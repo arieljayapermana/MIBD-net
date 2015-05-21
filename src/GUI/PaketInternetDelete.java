@@ -136,7 +136,7 @@ public class PaketInternetDelete extends javax.swing.JPanel {
         {                        
             nama=(String)tabelPaketInternet.getValueAt(tabelPaketInternet.getSelectedRow(), 0);
         }
-        this.delete("namaPaket", nama);
+        this.delete("nama_paket", nama);
         tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
