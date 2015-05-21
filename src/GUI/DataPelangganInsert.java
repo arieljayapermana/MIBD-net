@@ -332,7 +332,7 @@ public class DataPelangganInsert extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            String query = "select * from Data_Pelanggan where "+tipe+"="+input;
+            String query = "select * from Data_Pelanggan where "+tipe+"='"+input+"'";
             
             rs = sta.executeQuery(query);
             /*while (rs.next()) 

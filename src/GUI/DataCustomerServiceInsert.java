@@ -306,7 +306,7 @@ public class DataCustomerServiceInsert extends javax.swing.JPanel {
         }
         try
         {
-            String query="INSERT INTO Data_Cs values('"+nama+"','"+alamat+"','"+jenisKelamin+"','"+temp+"','"+noHp+"')";
+            String query="INSERT INTO Data_CS values('"+nama+"','"+alamat+"','"+jenisKelamin+"','"+temp+"','"+noHp+"')";
             sta.executeQuery(query);              
         }
         catch (SQLException ex)

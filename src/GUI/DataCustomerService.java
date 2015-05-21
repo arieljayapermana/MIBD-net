@@ -29,8 +29,8 @@ public class DataCustomerService extends javax.swing.JPanel {
      * Creates new form SignIn
      */
     public DataCustomerService(JFrame j) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-        Statement sta = conn.createStatement();
+        conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
+        sta = conn.createStatement();
         initComponents();
         jf=j;
         jTable1.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
@@ -166,7 +166,7 @@ public class DataCustomerService extends javax.swing.JPanel {
         {
             System.out.println(ex.toString());
         }
-        return rs;        
+        return rs;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

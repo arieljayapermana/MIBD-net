@@ -24,6 +24,7 @@ import net.proteanit.sql.DbUtils;
 public class DataPelangganUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
+    private DataPelangganUpdate1 obj=new DataPelangganUpdate1();
     JFrame jf;
     /**
      * Creates new form SignIn
@@ -245,18 +246,18 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("namaPaket", PaketInternetUpdate1.class.getName());
+        ResultSet rs=this.search("id_Pelanggan", obj.getId());
         int a=0,b=0,c=0,d=0,e=0,f=0;
         try {
-            if(!textFieldId.getText().equals(rs.getString("idPelanggan")))
+            if(!textFieldId.getText().equals(rs.getString("id_Pelanggan")))
             {
-                this.update("idPelanggan", rs.getString("idPelanggan"), "idPelanggan", textFieldId.getText());
+                this.update("id_Pelanggan", rs.getString("id_Pelanggan"), "id_Pelanggan", textFieldId.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 a=1;
             }
-            if(!textFieldNama.getText().equals(rs.getString("namaPaket")))
+            if(!textFieldNama.getText().equals(rs.getString("nama_Pelanggan")))
             {
-                this.update("nama", rs.getString("namaPaket"), "nama", textFieldNama.getText());
+                this.update("nama_Pelanggan", rs.getString("nama_Pelanggan"), "nama_Pelanggan", textFieldNama.getText());
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
                 b=1;
             }

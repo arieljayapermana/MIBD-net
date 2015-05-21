@@ -35,6 +35,11 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
         tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }
 
+    public DataPelangganUpdate1()
+    {
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

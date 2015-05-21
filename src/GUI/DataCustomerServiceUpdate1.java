@@ -180,7 +180,7 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
         return rs;        
     }
     
-       public String getId()
+    public String getId()
     {
         return this.id;
     }

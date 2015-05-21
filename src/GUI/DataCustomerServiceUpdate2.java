@@ -23,6 +23,7 @@ import net.proteanit.sql.DbUtils;
 public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
+    private DataCustomerServiceUpdate1 obj;
     JFrame jf;
     /**
      * Creates new form DataCustomerServiceEdit
@@ -30,6 +31,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     public DataCustomerServiceUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
+        obj=new DataCustomerServiceUpdate1(j);
         initComponents();
         jf=j;
         tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
@@ -284,45 +286,47 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs;
-        String nama=textFieldNama.getText();
-        rs=this.search("nama", nama);
-        if(nama.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukan Nama Costumer Service!!!");
-        }
-        else try
-        {
-            if(nama.equals(rs.getString("nama")))
+        ResultSet rs=this.search("namaPaket", obj.getId());
+        int b=0,c=0,d=0,e=0,f=0;
+        try {            
+            if(!textFieldNama.getText().equals(rs.getString("namaP")))
             {
-                JOptionPane.showMessageDialog(null, "Nama Costumer Service Sudah Ada!!!");
+                this.update("nama", rs.getString("nama"), "nama", textFieldNama.getText());
+                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
+                b=1;
             }
+            if(!textFieldAlamat.getText().equals(rs.getString("alamat")))
+            {
+                this.update("alamat", rs.getString("alamat"), "alamat", textFieldAlamat.getText());
+                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
+                c=1;
+            }
+            if(!textFieldKelamin.getText().equals(rs.getString("jenis_kelamin")))
+            {
+                this.update("jenis_kelamin", rs.getString("jenis_kelamin"), "jenis_kelamin", textFieldKelamin.getText());
+                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
+                d=1;
+            }
+            if(!textFieldTanggal.getText().equals(rs.getString("tanggal_lahir")))
+            {
+                this.update("tanggal_lahir", rs.getString("tanggal_lahir"), "tanggal_lahir", textFieldTanggal.getText());
+                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
+                e=1;
+            }
+            if(!textFieldHp.getText().equals(rs.getString("no_Hp")))
+            {
+                this.update("no_Hp", rs.getString("no_Hp"), "no_Hp", textFieldHp.getText());
+                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
+                f=1;
+            }
+            if(b==0 && c==0 && d==0 && e==0 && f==0)
+            {
+                JOptionPane.showMessageDialog(null, "Tidak Ada Data Yang Diupdate!!!");
+            }
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(PaketInternetInsert.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String alamat=textFieldAlamat.getText();
-        if(alamat.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukan Alamat Costumer Service!!!");
-        }
-        String kelamin=textFieldKelamin.getText();
-        if(kelamin.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukan Jenis Kelamin Costumer Service!!!");
-        }
-        String tanggal=textFieldTanggal.getText();
-        if(tanggal.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukan Tanggal Lahir Costumer Service!!!");
-        }
-        String hp=textFieldHp.getText();
-        if(hp.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukan No HP Costumer Service!!!");
-        }
-//        this.insertDataCS(nama, alamat, kelamin, tanggal, hp);
         tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -362,7 +366,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         ResultSet rs=null;
         try
         {
-            String query = "select * from Data_CS where "+tipe+"="+input;
+            String query = "select * from Data_CS where "+tipe+"='"+input+"'";
             
             rs = sta.executeQuery(query);           
         }
