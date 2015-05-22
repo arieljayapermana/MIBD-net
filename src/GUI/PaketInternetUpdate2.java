@@ -25,21 +25,19 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
     private String inputTabel;
+    private String text1="";
+    private String text2="";
+    private String text3="";
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public PaketInternetUpdate2(JFrame j, int indeks) throws SQLException {
+    public PaketInternetUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-        sta = conn.createStatement();
-        inputTabel=(String)tabelPaketInternet.getValueAt(indeks, 0);
-        ResultSet rs=this.search("nama_paket", inputTabel);
-        textFieldNama.setText(rs.getString("nama_paket"));
-        textFieldHarga.setText(rs.getString("harga_paket"));
-        textFieldKuota.setText(rs.getString("Kuota"));
+        sta = conn.createStatement(); 
         initComponents();
-        jf=j;
-        tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        jf=j;        
+        
     }
 
     /**
@@ -54,7 +52,7 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelPaketInternet = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        buttonUpdate = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         textFieldKuota = new javax.swing.JTextField();
         textFieldHarga = new javax.swing.JTextField();
@@ -62,6 +60,9 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        buttonPilih = new javax.swing.JButton();
+        buttonTampil = new javax.swing.JButton();
+        textFieldBaris = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -82,10 +83,10 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tabelPaketInternet);
 
-        jButton1.setText("UPDATE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonUpdate.setText("UPDATE");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonUpdateActionPerformed(evt);
             }
         });
 
@@ -102,6 +103,20 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
 
         jLabel6.setText("Kuota Paket       :");
 
+        buttonPilih.setText("Pilih Baris");
+        buttonPilih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilihActionPerformed(evt);
+            }
+        });
+
+        buttonTampil.setText("Tampil");
+        buttonTampil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTampilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,29 +129,41 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(270, 270, 270)
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                            .addComponent(jButton2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(270, 270, 270)
+                                .addComponent(buttonUpdate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(31, 31, 31))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(32, 32, 32)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(32, 32, 32)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(31, 31, 31)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textFieldKuota, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                                .addComponent(textFieldHarga)
-                                .addComponent(textFieldNama)))))
+                                        .addComponent(jLabel4)
+                                        .addGap(31, 31, 31)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textFieldKuota, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                                    .addComponent(textFieldHarga)
+                                    .addComponent(textFieldNama))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(buttonTampil))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonPilih)
+                .addGap(122, 122, 122))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,10 +172,12 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonTampil)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -156,49 +185,24 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldKuota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(buttonPilih)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(buttonUpdate)
                     .addComponent(jButton2))
                 .addGap(200, 200, 200))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("nama_paket", inputTabel);
-        int a=0,b=0,c=0;
-        try {
-            if(!textFieldNama.getText().equals(rs.getString("nama_paket")))
-            {
-                this.update("nama", rs.getString("nama_paket"), "nama", textFieldNama.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                a=1;
-            }
-            if(!textFieldHarga.getText().equals(rs.getString("harga_paket")))
-            {
-                this.update("harga", rs.getString("harga_paket"), "harga", textFieldHarga.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                b=1;
-            }
-            if(!textFieldKuota.getText().equals(rs.getString("Kutoa")))
-            {
-                this.update("Kutoa", rs.getString("Kutoa"), "Kutoa", textFieldKuota.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                c=1;
-            }
-            if(a==0 && b==0 && c==0)
-            {
-                JOptionPane.showMessageDialog(null, "Tidak Ada Data Yang Diupdate!!!");
-            }
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-                                                
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
+        this.update("nama_paket", textFieldNama.getText(), "nama_paket", text1);
+        this.update("harga_paket", textFieldHarga.getText(), "harga_paket", text2);
+        this.update("Kuota", textFieldKuota.getText(), "Kuota", text3);
+        tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));                                               
+    }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
@@ -208,6 +212,34 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
+        try {
+            this.tes();
+        } catch (SQLException ex) {
+            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }                
+            // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilihActionPerformed
+
+    private void buttonTampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTampilActionPerformed
+        tabelPaketInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTampilActionPerformed
+
+    public void tes() throws SQLException
+    {    
+        int baris=Integer.parseInt(textFieldBaris.getText());
+        String temp1=(String)tabelPaketInternet.getValueAt(baris, 0);
+        String temp2=(String)tabelPaketInternet.getValueAt(baris, 1);
+        String temp3=(String)tabelPaketInternet.getValueAt(baris, 2);
+        textFieldNama.setText(temp1);
+        textFieldHarga.setText(temp2);
+        textFieldKuota.setText(temp3);
+        text1=textFieldNama.getText();
+        text2=textFieldHarga.getText();
+        text3=textFieldKuota.getText();
+    }
+    
     public ResultSet showTabel()
     {
         ResultSet rs=null;
@@ -265,7 +297,9 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonPilih;
+    private javax.swing.JButton buttonTampil;
+    private javax.swing.JButton buttonUpdate;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -273,6 +307,7 @@ public class PaketInternetUpdate2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelPaketInternet;
+    private javax.swing.JTextField textFieldBaris;
     private javax.swing.JTextField textFieldHarga;
     private javax.swing.JTextField textFieldKuota;
     private javax.swing.JTextField textFieldNama;

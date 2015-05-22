@@ -50,7 +50,6 @@ public class PaketInternetUpdate1 extends javax.swing.JPanel {
         tabelPaketInternet = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -85,8 +84,6 @@ public class PaketInternetUpdate1 extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Pilih record yang ingin di update!");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,12 +98,9 @@ public class PaketInternetUpdate1 extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(277, 277, 277)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)))))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -116,9 +110,7 @@ public class PaketInternetUpdate1 extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -127,17 +119,8 @@ public class PaketInternetUpdate1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int temp=0;
-        if(this.tabelPaketInternet.getSelectedRow()==-1)
-        {
-            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
-        }
-        else
-        {                        
-            temp=tabelPaketInternet.getSelectedRow();
-        }
         try {
-            jf.setPanel(new PaketInternetUpdate2(jf, temp));
+            jf.setPanel(new PaketInternetUpdate2(jf/*, temp*/));
         } catch (SQLException ex) {
             Logger.getLogger(PaketInternetUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,7 +159,6 @@ public class PaketInternetUpdate1 extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelPaketInternet;
     // End of variables declaration//GEN-END:variables

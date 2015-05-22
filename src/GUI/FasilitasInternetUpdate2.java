@@ -24,26 +24,21 @@ import net.proteanit.sql.DbUtils;
 public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
-    private String inputTabel;
+    private String text1="";
+    private String text2="";
+    private String text3="";
+    private String text4="";
+    private String text5="";
+    private String text6="";
     JFrame jf;
     /**
      * Creates new form SignIn
      */
-    public FasilitasInternetUpdate2(JFrame j, int indeks) throws SQLException {
+    public FasilitasInternetUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
-        inputTabel=(String)tabelFasilitasInternet.getValueAt(indeks, 0);
-        ResultSet rs=this.search("nama", inputTabel);
-        textFieldNama.setText(rs.getString("nama"));
-        textFieldBrowsing.setText(rs.getString("browsing"));
-        textFieldMail.setText(rs.getString("mail"));
-        textFieldSosmed.setText(rs.getString("sosmed"));
-        textFieldSms.setText(rs.getString("sms"));
-        textFieldTelepon.setText(rs.getString("telepon"));
         initComponents();
         jf=j;
-        tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-
     }
 
     /**
@@ -58,7 +53,7 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelFasilitasInternet = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        buttonUpdate = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -72,6 +67,9 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
         textFieldSosmed = new javax.swing.JTextField();
         textFieldSms = new javax.swing.JTextField();
         textFieldTelepon = new javax.swing.JTextField();
+        buttonTampil = new javax.swing.JButton();
+        textFieldBaris = new javax.swing.JTextField();
+        buttonPilih = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -92,10 +90,10 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tabelFasilitasInternet);
 
-        jButton1.setText("UPDATE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonUpdate.setText("UPDATE");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonUpdateActionPerformed(evt);
             }
         });
 
@@ -118,6 +116,26 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
 
         jLabel7.setText("Telepon              :");
 
+        buttonTampil.setText("Tampil");
+        buttonTampil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTampilActionPerformed(evt);
+            }
+        });
+
+        textFieldBaris.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldBarisActionPerformed(evt);
+            }
+        });
+
+        buttonPilih.setText("Pilih Baris");
+        buttonPilih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilihActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,7 +151,9 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jButton1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(buttonTampil)
+                                        .addComponent(buttonUpdate))
                                     .addGap(46, 46, 46)
                                     .addComponent(jButton2)))
                             .addGroup(layout.createSequentialGroup()
@@ -155,25 +175,35 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
                                                 .addComponent(jLabel5)
                                                 .addGap(1, 1, 1)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(textFieldBrowsing, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(268, 268, 268))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(textFieldBrowsing, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(2, 2, 2)
-                                            .addComponent(textFieldTelepon))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(2, 2, 2)
-                                            .addComponent(textFieldSms))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(1, 1, 1)
-                                            .addComponent(textFieldSosmed, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(268, 268, 268)))))
+                                        .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(45, 45, 45))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(textFieldTelepon))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(textFieldSms))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(textFieldSosmed, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(buttonPilih)
+                                        .addGap(24, 24, 24)))))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,15 +216,21 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(buttonTampil))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldBrowsing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -208,12 +244,13 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textFieldTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
+                            .addComponent(jLabel7)))
+                    .addComponent(buttonPilih))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(buttonUpdate)
                     .addComponent(jButton2))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,57 +262,57 @@ public class FasilitasInternetUpdate2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("nama", inputTabel);
-        int a=0,b=0,c=0,d=0,e=0,f=0;
-        try {
-            if(!textFieldNama.getText().equals(rs.getString("nama")))
-            {
-                this.update("nama", rs.getString("nama"), "nama", textFieldNama.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                a=1;
-            }
-            if(!textFieldBrowsing.getText().equals(rs.getString("browsing")))
-            {
-                this.update("browsing", rs.getString("browsing"), "browsing", textFieldBrowsing.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                b=1;
-            }
-            if(!textFieldMail.getText().equals(rs.getString("mail")))
-            {
-                this.update("mail", rs.getString("mail"), "mail", textFieldMail.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                c=1;
-            }
-            if(!textFieldSosmed.getText().equals(rs.getString("sosmed")))
-            {
-                this.update("sosmed", rs.getString("sosmed"), "sosmed", textFieldSosmed.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                d=1;
-            }
-            if(!textFieldSms.getText().equals(rs.getString("sms")))
-            {
-                this.update("sms", rs.getString("sms"), "sms", textFieldSms.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                e=1;
-            }
-            if(!textFieldTelepon.getText().equals(rs.getString("telepon")))
-            {
-                this.update("telepon", rs.getString("telepon"), "telepon", textFieldTelepon.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                f=1;
-            }
-            if(a==0 && b==0 && c==0 && d==0 && e==0 && f==0)
-            {
-                JOptionPane.showMessageDialog(null, "Tidak Ada Data Yang Diupdate!!!");
-            }
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
+        this.update("nama", textFieldNama.getText(), "nama", text1);
+        this.update("browsing", textFieldBrowsing.getText(), "browsing", text2);
+        this.update("mail", textFieldMail.getText(), "mail", text3);
+        this.update("sosmed", textFieldSosmed.getText(), "sosmed", text4);
+        this.update("sms", textFieldSms.getText(), "sms", text5);
+        this.update("telepon", textFieldTelepon.getText(), "telepon", text6);
+        tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));                
+    }//GEN-LAST:event_buttonUpdateActionPerformed
 
+    private void buttonTampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTampilActionPerformed
+        tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+// TODO add your handling code here:
+    }//GEN-LAST:event_buttonTampilActionPerformed
+
+    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
+        try {
+            this.tes();
+        } catch (SQLException ex) {
+            Logger.getLogger(FasilitasInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilihActionPerformed
+
+    private void textFieldBarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBarisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldBarisActionPerformed
+
+    public void tes() throws SQLException
+    {    
+        int baris=Integer.parseInt(textFieldBaris.getText());
+        String temp1=(String)tabelFasilitasInternet.getValueAt(baris, 0);
+        String temp2=(String)tabelFasilitasInternet.getValueAt(baris, 1);
+        String temp3=(String)tabelFasilitasInternet.getValueAt(baris, 2);
+        String temp4=(String)tabelFasilitasInternet.getValueAt(baris, 3);
+        String temp5=(String)tabelFasilitasInternet.getValueAt(baris, 4);
+        String temp6=(String)tabelFasilitasInternet.getValueAt(baris, 5);
+        textFieldNama.setText(temp1);
+        textFieldBrowsing.setText(temp2);
+        textFieldMail.setText(temp3);
+        textFieldSosmed.setText(temp4);
+        textFieldSms.setText(temp5);
+        textFieldTelepon.setText(temp6);
+        text1=textFieldNama.getText();
+        text2=textFieldBrowsing.getText();
+        text3=textFieldMail.getText();
+        text4=textFieldSosmed.getText();
+        text5=textFieldSms.getText();
+        text6=textFieldTelepon.getText();
+    }
+    
 public ResultSet showTabel()
     {
         ResultSet rs=null;
@@ -328,6 +365,14 @@ public ResultSet showTabel()
     */
     public void update(String tipe, String inputTipe, String tipe2, String input)
     {        
+        if(tipe.equals("sms"))
+        {
+            tipe+=" sms/hari";
+        }
+        else if(tipe.equals("telepon"))
+        {
+            tipe+=" jam/hari";
+        }
         try
         {
             String query="UPDATE Fasilitas_Internet SET "+tipe+"='"+inputTipe+"' where "+tipe2+"='"+input+"'";
@@ -340,7 +385,9 @@ public ResultSet showTabel()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonPilih;
+    private javax.swing.JButton buttonTampil;
+    private javax.swing.JButton buttonUpdate;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -351,6 +398,7 @@ public ResultSet showTabel()
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelFasilitasInternet;
+    private javax.swing.JTextField textFieldBaris;
     private javax.swing.JTextField textFieldBrowsing;
     private javax.swing.JTextField textFieldMail;
     private javax.swing.JTextField textFieldNama;

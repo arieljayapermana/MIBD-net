@@ -51,7 +51,6 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
         tabelCS = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
 
         jPanel1.setMaximumSize(new java.awt.Dimension(800, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 600));
@@ -86,8 +85,6 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Pilih recod yang inigin di-update!");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,12 +100,9 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(267, 267, 267)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jButton2)))))))
+                                .addComponent(jButton1)
+                                .addGap(21, 21, 21)
+                                .addComponent(jButton2)))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,9 +112,7 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -152,19 +144,10 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int temp=0;
-        if(this.tabelCS.getSelectedRow()==-1)
-        {
-            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
-        }
-        else
-        {                        
-            temp=tabelCS.getSelectedRow();
-        }
         try {
-            jf.setPanel(new DataCustomerServiceUpdate2(jf, temp));
+            jf.setPanel(new DataCustomerServiceUpdate2(jf));
         } catch (SQLException ex) {
-            Logger.getLogger(DataCustomerService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataCustomerServiceUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     /*
@@ -189,7 +172,6 @@ public class DataCustomerServiceUpdate1 extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelCS;

@@ -55,7 +55,6 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
         tabelDataPerpanjangan = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -94,8 +93,6 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Pilih record yang ingin di update !");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -112,13 +109,10 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(275, 275, 275)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(361, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,9 +121,7 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -222,20 +214,12 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int temp=0;
-        if(this.tabelDataPerpanjangan.getSelectedRow()==-1)
-        {
-            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
-        }
-        else
-        {                                    
-            temp=tabelDataPerpanjangan.getSelectedRow();
-        }
         try {
-            jf.setPanel(new DataPerpanjanganPaketInternetUpdate2(jf, temp));
+            jf.setPanel(new DataPerpanjanganPaketInternetUpdate2(jf));
         } catch (SQLException ex) {
             Logger.getLogger(DataPerpanjanganPaketInternetUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -273,7 +257,6 @@ public class DataPerpanjanganPaketInternetUpdate1 extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

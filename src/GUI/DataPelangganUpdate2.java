@@ -25,26 +25,23 @@ import net.proteanit.sql.DbUtils;
 public class DataPelangganUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;
-    private String inputTabel;
     JFrame jf;
+    
+    private String text1="";
+    private String text2="";
+    private String text3="";
+    private String text4="";
+    private String text5="";
+    private String text6="";
     /**
      * Creates new form SignIn
      */
-    public DataPelangganUpdate2(JFrame j, int indeks) throws SQLException {
+    public DataPelangganUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
-        inputTabel=(String)tabelDataPelanggan.getValueAt(indeks, 0);
-        ResultSet rs=this.search("", inputTabel);
-        textFieldId.setText(rs.getString("id_Pelanggan"));
-        textFieldNama.setText(rs.getString("nama_Pelanggan"));
-        textFieldAlamat.setText(rs.getString("alamat"));
-        textFieldKelamin.setText(rs.getString("jenis_kelamin"));
-        textFieldTanggal.setText(rs.getString("tanggal_lahir"));
-        textFieldHp.setText(rs.getString("no_Hp"));
         initComponents();
         jf=j;
         //tess
-        tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
     }
 
     /**
@@ -75,6 +72,9 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
         textFieldKelamin = new javax.swing.JTextField();
         textFieldTanggal = new javax.swing.JTextField();
         textFieldHp = new javax.swing.JTextField();
+        buttonPilih = new javax.swing.JButton();
+        buttonTampil = new javax.swing.JButton();
+        textFieldBaris = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -153,9 +153,8 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addGap(1, 1, 1)
                                                 .addComponent(textFieldHp))
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(textFieldNama)
-                                                .addComponent(textFieldAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(textFieldNama, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textFieldAlamat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(textFieldKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(textFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -229,11 +228,33 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
                 .addGap(0, 126, Short.MAX_VALUE))
         );
 
+        buttonPilih.setText("Pilih Baris");
+        buttonPilih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilihActionPerformed(evt);
+            }
+        });
+
+        buttonTampil.setText("Tampil");
+        buttonTampil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTampilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(483, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonPilih)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonTampil)))
+                .addGap(175, 175, 175))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -242,7 +263,14 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(516, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonPilih)
+                    .addComponent(buttonTampil))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(161, 161, 161))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -260,55 +288,53 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("id_Pelanggan", inputTabel);
-        int a=0,b=0,c=0,d=0,e=0,f=0;
-        try {
-            if(!textFieldId.getText().equals(rs.getString("id_Pelanggan")))
-            {
-                this.update("id_Pelanggan", rs.getString("id_Pelanggan"), "id_Pelanggan", textFieldId.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                a=1;
-            }
-            if(!textFieldNama.getText().equals(rs.getString("nama_Pelanggan")))
-            {
-                this.update("nama_Pelanggan", rs.getString("nama_Pelanggan"), "nama_Pelanggan", textFieldNama.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                b=1;
-            }
-            if(!textFieldAlamat.getText().equals(rs.getString("alamat")))
-            {
-                this.update("alamat", rs.getString("alamat"), "alamat", textFieldAlamat.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                c=1;
-            }
-            if(!textFieldKelamin.getText().equals(rs.getString("jenisKelamin")))
-            {
-                this.update("jenisKelamin", rs.getString("jenisKelamin"), "jenisKelamin", textFieldKelamin.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                d=1;
-            }
-            if(!textFieldTanggal.getText().equals(rs.getString("tanggalLahir")))
-            {
-                this.update("tanggalLahir", rs.getString("tanggalLahir"), "tanggalLahir", textFieldTanggal.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                e=1;
-            }
-            if(!textFieldHp.getText().equals(rs.getString("no_Hp")))
-            {
-                this.update("no_Hp", rs.getString("no_Hp"), "no_Hp", textFieldHp.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                f=1;
-            }
-            if(a==0 && b==0 && c==0 && d==0 && e==0 && f==0)
-            {
-                JOptionPane.showMessageDialog(null, "Tidak Ada Data Yang Diupdate!!!");
-            }
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        this.update("id_Pelanggan", textFieldId.getText(), "id_Pelanggan", text1);
+        this.update("nama_Pelanggan", textFieldNama.getText(), "nama_Pelanggan", text2);
+        this.update("alamat", textFieldAlamat.getText(), "alamat", text3);
+        this.update("jenis_kelamin", textFieldKelamin.getText(), "jenis_kelamin", text4);
+        this.update("tanggal_Lahir", textFieldTanggal.getText(), "tanggal_Lahir", text5);
+        this.update("no_hp", textFieldHp.getText(), "no_hp", text6);
+        tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel())); 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
+        try {
+            this.tes();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelangganUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilihActionPerformed
+
+    private void buttonTampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTampilActionPerformed
+        tabelDataPelanggan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTampilActionPerformed
+    
+    public void tes() throws SQLException
+    {    
+        int baris=Integer.parseInt(textFieldBaris.getText());
+        String temp1=(String)tabelDataPelanggan.getValueAt(baris, 0);
+        String temp2=(String)tabelDataPelanggan.getValueAt(baris, 1);
+        String temp3=(String)tabelDataPelanggan.getValueAt(baris, 2);
+        String temp4=(String)tabelDataPelanggan.getValueAt(baris, 3);
+        Date temp=(Date)tabelDataPelanggan.getValueAt(baris,4);
+        String temp5=temp.toString();
+        String temp6=(String)tabelDataPelanggan.getValueAt(baris, 5);
+        textFieldId.setText(temp1);
+        textFieldNama.setText(temp2);
+        textFieldAlamat.setText(temp3);
+        textFieldKelamin.setText(temp4);
+        textFieldTanggal.setText(temp5);
+        textFieldHp.setText(temp6);
+        text1=textFieldId.getText();
+        text2=textFieldNama.getText();
+        text3=textFieldAlamat.getText();
+        text4=textFieldKelamin.getText();
+        text5=textFieldTanggal.getText();
+        text6=textFieldHp.getText();
+    }
+    
     /*
     method show buat nampilin semua isi tabel
     */
@@ -319,11 +345,7 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
         {
             String query = "select * from Data_Pelanggan";
             
-            rs = sta.executeQuery(query);
-            /*while (rs.next()) 
-            {
-                System.out.println(rs.getString("title"));
-            }*/            
+            rs = sta.executeQuery(query);            
         }
         catch (SQLException ex)
         {
@@ -343,11 +365,7 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
         {
             String query = "select * from Data_Pelanggan where "+tipe+"="+input;
             
-            rs = sta.executeQuery(query);
-            /*while (rs.next()) 
-            {
-                System.out.println(rs.getString("title"));
-            }*/            
+            rs = sta.executeQuery(query);           
         }
         catch (SQLException ex)
         {
@@ -364,23 +382,6 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
     */
     public void update(String tipe, String inputTipe, String tipe2, String input)
     {        
-        char a=input.charAt(2);
-        char b=input.charAt(5);
-        String temp="";
-        if(a=='-')
-        {            
-            temp+=input.substring(6, 10);
-            temp+=input.substring(3, 5);
-            temp+=input.substring(0, 2);
-            input=temp;
-        }
-        if(b=='-')
-        {           
-            temp+=input.substring(0, 4);
-            temp+=input.substring(5, 7);
-            temp+=input.substring(8, 10);
-            input=temp;
-        }
         try
         {
             String query="UPDATE Data_Pelanggan SET "+tipe+"='"+inputTipe+"' where "+tipe2+"='"+input+"'";
@@ -392,6 +393,8 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonPilih;
+    private javax.swing.JButton buttonTampil;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -406,6 +409,7 @@ public class DataPelangganUpdate2 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelDataPelanggan;
     private javax.swing.JTextField textFieldAlamat;
+    private javax.swing.JTextField textFieldBaris;
     private javax.swing.JTextField textFieldHp;
     private javax.swing.JTextField textFieldId;
     private javax.swing.JTextField textFieldKelamin;

@@ -52,7 +52,6 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
         tabelDataPelanggan = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -89,8 +88,6 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setText("Pilih record yang ingin di-update!");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -99,12 +96,9 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
                         .addGap(326, 326, 326))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,9 +109,7 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -185,20 +177,12 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int temp=0;
-        if(this.tabelDataPelanggan.getSelectedRow()==-1)
-        {
-            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
-        }
-        else
-        {                                    
-            temp=tabelDataPelanggan.getSelectedRow();
-        }
         try {
-            jf.setPanel(new DataPelangganUpdate2(jf, temp));
+            jf.setPanel(new DataPelangganUpdate2(jf));
         } catch (SQLException ex) {
             Logger.getLogger(DataPelangganUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /*
@@ -211,11 +195,7 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
         {
             String query = "select * from Data_Pelanggan";
             
-            rs = sta.executeQuery(query);
-            /*while (rs.next()) 
-            {
-                System.out.println(rs.getString("title"));
-            }*/            
+            rs = sta.executeQuery(query);            
         }
         catch (SQLException ex)
         {
@@ -227,7 +207,6 @@ public class DataPelangganUpdate1 extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

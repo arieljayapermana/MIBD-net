@@ -34,7 +34,6 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
         initComponents();
         jf=j;
         tabelFasilitasInternet.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-
     }
 
     /**
@@ -49,9 +48,8 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelFasilitasInternet = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        buttonUpdate = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -72,10 +70,10 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tabelFasilitasInternet);
 
-        jButton1.setText("UPDATE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonUpdate.setText("UPDATE");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonUpdateActionPerformed(evt);
             }
         });
 
@@ -85,8 +83,6 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Pilih record yang ingin di update!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,12 +99,9 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(246, 246, 246)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton2)))))))
+                                .addComponent(buttonUpdate)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,11 +111,9 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(buttonUpdate)
                     .addComponent(jButton2))
                 .addGap(66, 66, 66))
         );
@@ -136,22 +127,13 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int temp=0;
-        if(this.tabelFasilitasInternet.getSelectedRow()==-1)
-        {
-            JOptionPane.showMessageDialog(null, "Pilih Baris Dalam Tabel");
-        }
-        else
-        {                        
-            temp=tabelFasilitasInternet.getSelectedRow();
-        }
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         try {
-            jf.setPanel(new FasilitasInternetUpdate2(jf, temp));
+            jf.setPanel(new FasilitasInternetUpdate2(jf));
         } catch (SQLException ex) {
             Logger.getLogger(FasilitasInternetUpdate1.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonUpdateActionPerformed
     public ResultSet showTabel()
     {
         ResultSet rs=null;
@@ -172,10 +154,9 @@ public class FasilitasInternetUpdate1 extends javax.swing.JPanel {
         return rs;        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonUpdate;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelFasilitasInternet;
     // End of variables declaration//GEN-END:variables

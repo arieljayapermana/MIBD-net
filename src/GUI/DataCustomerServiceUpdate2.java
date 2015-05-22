@@ -7,6 +7,7 @@
 package GUI;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,24 +25,20 @@ import net.proteanit.sql.DbUtils;
 public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     private Connection conn;
     private Statement sta;    
-    private String inputTabel;
+    private String text1;
+    private String text2;
+    private String text3;
+    private String text4;
+    private String text5;
     JFrame jf;
     /**
      * Creates new form DataCustomerServiceEdit
      */
-    public DataCustomerServiceUpdate2(JFrame j, int indeks) throws SQLException {
+    public DataCustomerServiceUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
-        sta = conn.createStatement();
-        inputTabel=(String)tabelCS.getValueAt(indeks, 0);
-        ResultSet rs=this.search("nama",inputTabel);
-        textFieldNama.setText(rs.getString("nama"));
-        textFieldAlamat.setText(rs.getString("alamat"));
-        textFieldKelamin.setText(rs.getString("jenis_kelamin"));
-        textFieldTanggal.setText(rs.getString("tanggal_lahir"));
-        textFieldHp.setText(rs.getString("no_Hp"));        
+        sta = conn.createStatement();               
         initComponents();
-        jf=j;
-        tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));        
+        jf=j;       
     }    
     
     /**
@@ -62,7 +59,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelCS = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        buttonUpdate = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         textFieldNama = new javax.swing.JTextField();
@@ -74,7 +71,9 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         textFieldKelamin = new javax.swing.JTextField();
         textFieldTanggal = new javax.swing.JTextField();
         textFieldHp = new javax.swing.JTextField();
-        buttonPilih = new javax.swing.JButton();
+        buttonBaris = new javax.swing.JButton();
+        buttonTampil = new javax.swing.JButton();
+        textFieldBaris = new javax.swing.JTextField();
 
         jPanel1.setMaximumSize(new java.awt.Dimension(800, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 600));
@@ -105,10 +104,10 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tabelCS);
 
-        jButton1.setText("INSERT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonUpdate.setText("UPDATE");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonUpdateActionPerformed(evt);
             }
         });
 
@@ -129,10 +128,17 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
 
         jLabel12.setText("No HP                  :");
 
-        buttonPilih.setText("pilih");
-        buttonPilih.addActionListener(new java.awt.event.ActionListener() {
+        buttonBaris.setText("Pilih Baris");
+        buttonBaris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPilihActionPerformed(evt);
+                buttonBarisActionPerformed(evt);
+            }
+        });
+
+        buttonTampil.setText("Tampil");
+        buttonTampil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTampilActionPerformed(evt);
             }
         });
 
@@ -148,13 +154,11 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton3))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel12)
                                         .addGap(18, 18, 18)
@@ -175,8 +179,20 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                                         .addComponent(jLabel8)
                                         .addGap(18, 18, 18)
                                         .addComponent(textFieldNama)))
-                                .addGap(79, 79, 79)
-                                .addComponent(buttonPilih)))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton3)
+                                            .addComponent(buttonUpdate)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(47, 47, 47)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(buttonBaris)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(buttonTampil))
+                                            .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -189,16 +205,17 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPilih))
+                    .addComponent(textFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(textFieldAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonUpdate))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(textFieldKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -206,12 +223,13 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldHp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(jLabel12)
+                    .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1))
-                .addGap(82, 82, 82))
+                    .addComponent(buttonBaris)
+                    .addComponent(buttonTampil))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -243,7 +261,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))))
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -283,50 +301,14 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("namaPaket", inputTabel);
-        int b=0,c=0,d=0,e=0,f=0;
-        try {            
-            if(!textFieldNama.getText().equals(rs.getString("namaP")))
-            {
-                this.update("nama", rs.getString("nama"), "nama", textFieldNama.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                b=1;
-            }
-            if(!textFieldAlamat.getText().equals(rs.getString("alamat")))
-            {
-                this.update("alamat", rs.getString("alamat"), "alamat", textFieldAlamat.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                c=1;
-            }
-            if(!textFieldKelamin.getText().equals(rs.getString("jenis_kelamin")))
-            {
-                this.update("jenis_kelamin", rs.getString("jenis_kelamin"), "jenis_kelamin", textFieldKelamin.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                d=1;
-            }
-            if(!textFieldTanggal.getText().equals(rs.getString("tanggal_lahir")))
-            {
-                this.update("tanggal_lahir", rs.getString("tanggal_lahir"), "tanggal_lahir", textFieldTanggal.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                e=1;
-            }
-            if(!textFieldHp.getText().equals(rs.getString("no_Hp")))
-            {
-                this.update("no_Hp", rs.getString("no_Hp"), "no_Hp", textFieldHp.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                f=1;
-            }
-            if(b==0 && c==0 && d==0 && e==0 && f==0)
-            {
-                JOptionPane.showMessageDialog(null, "Tidak Ada Data Yang Diupdate!!!");
-            }
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
+        this.update("nama", textFieldNama.getText(), "nama", text1);
+        this.update("alamat", textFieldAlamat.getText(), "alamat", text2);
+        this.update("jenis_kelamin", textFieldKelamin.getText(), "jenis_kelamin", text3);
+        this.update("tanggal_lahir", textFieldTanggal.getText(), "tanggal_lahir", text4);
+        this.update("no_Hp", textFieldHp.getText(), "no_Hp", text5);
+        tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel())); 
+    }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
@@ -336,20 +318,41 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
-        ResultSet rs2=this.search("nama",(String)tabelCS.getValueAt(tabelCS.getSelectedRow(), 0));
+    private void buttonBarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarisActionPerformed
         try {
-            textFieldNama.setText(rs2.getString("nama"));
+            this.tes();
         } catch (SQLException ex) {
-            Logger.getLogger(DataCustomerServiceUpdate2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            textFieldAlamat.setText(rs2.getString("alamat"));
-        } catch (SQLException ex) {
-            Logger.getLogger(DataCustomerServiceUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataPelangganUpdate2.class.getName()).log(Level.SEVERE, null, ex);
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPilihActionPerformed
+    }//GEN-LAST:event_buttonBarisActionPerformed
+
+    private void buttonTampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTampilActionPerformed
+        tabelCS.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTampilActionPerformed
+    
+    public void tes() throws SQLException
+    {    
+        int baris=Integer.parseInt(textFieldBaris.getText());
+        String temp1=(String)tabelCS.getValueAt(baris, 0);
+        String temp2=(String)tabelCS.getValueAt(baris, 1);
+        String temp3=(String)tabelCS.getValueAt(baris, 2);
+        Date temp=(Date)tabelCS.getValueAt(baris,3);
+        String temp4=temp.toString();
+        String temp5=(String)tabelCS.getValueAt(baris, 4);
+        textFieldNama.setText(temp1);
+        textFieldAlamat.setText(temp2);
+        textFieldKelamin.setText(temp3);
+        textFieldTanggal.setText(temp4);
+        textFieldHp.setText(temp5);
+        text1=textFieldNama.getText();
+        text2=textFieldAlamat.getText();
+        text3=textFieldKelamin.getText();
+        text4=textFieldTanggal.getText();
+        text5=textFieldHp.getText();
+    }
+    
     /*
     method show buat nampilin semua isi tabel
     */
@@ -397,24 +400,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     yang datanya akan dirubah
     */
     public void update(String tipe, String inputTipe, String tipe2, String input)
-    {        
-        char a=input.charAt(2);
-        char b=input.charAt(5);
-        String temp="";
-        if(a=='-')
-        {            
-            temp+=input.substring(6, 10);
-            temp+=input.substring(3, 5);
-            temp+=input.substring(0, 2);
-            input=temp;
-        }
-        if(b=='-')
-        {           
-            temp+=input.substring(0, 4);
-            temp+=input.substring(5, 7);
-            temp+=input.substring(8, 10);
-            input=temp;
-        }
+    {                
         try
         {
             String query="UPDATE Data_CS SET "+tipe+"='"+inputTipe+"' where "+tipe2+"='"+input+"'";
@@ -427,8 +413,9 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonPilih;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonBaris;
+    private javax.swing.JButton buttonTampil;
+    private javax.swing.JButton buttonUpdate;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -445,6 +432,7 @@ public class DataCustomerServiceUpdate2 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabelCS;
     private javax.swing.JTextField textFieldAlamat;
+    private javax.swing.JTextField textFieldBaris;
     private javax.swing.JTextField textFieldHp;
     private javax.swing.JTextField textFieldKelamin;
     private javax.swing.JTextField textFieldNama;

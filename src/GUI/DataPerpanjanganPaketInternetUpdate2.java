@@ -27,22 +27,20 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     private Statement sta;
     private String inputTabel;
     JFrame jf;
+    
+    private String text1="";
+    private String text2="";
+    private String text3="";
+    private String text4="";
+    private String text5="";
     /**
      * Creates new form SignIn
      */
-    public DataPerpanjanganPaketInternetUpdate2(JFrame j, int indeks) throws SQLException {
+    public DataPerpanjanganPaketInternetUpdate2(JFrame j) throws SQLException {
         conn = DriverManager.getConnection("jdbc:sqlserver://10.100.70.70;user=i13042;password=christ0fer;database=i13042");      
         sta = conn.createStatement();
-        inputTabel=(String)tabelDataPerpanjangan.getValueAt(indeks, 0);
-        ResultSet rs=this.search("id", inputTabel);
-        textFieldId.setText(rs.getString("id"));
-        textFieldNama.setText(rs.getString("nama"));
-        textFieldTanggal.setText(rs.getString("tanggal_Penggunaan"));
-        textFieldKuota.setText(rs.getString("kuota_Tambahan"));
-        textFieldAkumulasi.setText(rs.getString("akumulasi_Kuota"));
         initComponents();
         jf=j;
-        tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
 
     }
 
@@ -74,6 +72,9 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         textFieldId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        buttonTampil = new javax.swing.JButton();
+        buttonPilih = new javax.swing.JButton();
+        textFieldBaris = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -112,12 +113,6 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
             }
         });
 
-        textFieldAkumulasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAkumulasiActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Hasil Akumulasi Kuota   :");
 
         jLabel3.setText("Kuota Ditambahkan       :");
@@ -127,6 +122,20 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
         jLabel5.setText("Nama Paket                   :");
 
         jLabel6.setText("ID Pelanggan                 :");
+
+        buttonTampil.setText("Tampil");
+        buttonTampil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTampilActionPerformed(evt);
+            }
+        });
+
+        buttonPilih.setText("Pilih Baris");
+        buttonPilih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilihActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -170,7 +179,14 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(textFieldAkumulasi)
                                 .addComponent(textFieldKuota)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(buttonPilih)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonTampil)))
+                .addGap(0, 158, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +207,7 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(textFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(textFieldKuota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -199,11 +215,15 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(textFieldAkumulasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(88, 88, 88))
+                    .addComponent(jButton2)
+                    .addComponent(buttonPilih)
+                    .addComponent(buttonTampil))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textFieldBaris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -292,53 +312,13 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ResultSet rs=this.search("nama", inputTabel);
-        int a=0,b=0,c=0,d=0,e=0;
-        try {            
-            if(!textFieldId.getText().equals(rs.getString("id")))
-            {
-                this.update("id", rs.getString("id"), "id", textFieldId.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                a=1;
-            }
-            if(!textFieldNama.getText().equals(rs.getString("nama")))
-            {
-                this.update("nama", rs.getString("nama"), "nama", textFieldNama.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                b=1;
-            }
-            if(!textFieldTanggal.getText().equals(rs.getString("tanggal_Penggunaan")))
-            {
-                this.update("tanggal_Penggunaan", rs.getString("tanggal_Penggunaan"), "tanggal_Penggunaan", textFieldTanggal.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                c=1;
-            }
-            if(!textFieldKuota.getText().equals(rs.getString("kuota_Tambahan")))
-            {
-                this.update("kuota_Tambahan", rs.getString("kuota_Tambahan"), "kuota_Tambahan", textFieldKuota.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                d=1;
-            }
-            if(!textFieldAkumulasi.getText().equals(rs.getString("akumulasi_Kuota")))
-            {
-                this.update("akumulasi_Kuota", rs.getString("akumulasi_Kuota"), "akumulasi_Kuota", textFieldAkumulasi.getText());
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate!!!");
-                e=1;
-            }
-            if(a==0 && b==0 && c==0 && d==0 && e==0)
-            {
-                JOptionPane.showMessageDialog(null, "Tidak Ada Data Yang Diupdate!!!");
-            }
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(PaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        this.update("id", textFieldId.getText(), "id", text1);
+        this.update("nama", textFieldNama.getText(), "nama", text2);
+        this.update("tanggal_Penggunaan", textFieldTanggal.getText(), "tanggal_Penggunaan", text3);
+        this.update("kuota_Tambahan", textFieldKuota.getText(), "kuota_Tambahan", text4);
+        this.update("akumulasi_Kuota", textFieldAkumulasi.getText(), "akumulasi_Kuota", text5);
+        tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel())); 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void textFieldAkumulasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAkumulasiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAkumulasiActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
@@ -348,6 +328,41 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void buttonTampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTampilActionPerformed
+        tabelDataPerpanjangan.setModel(DbUtils.resultSetToTableModel(this.showTabel()));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTampilActionPerformed
+
+    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
+        try {
+            this.tes();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPerpanjanganPaketInternetUpdate2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilihActionPerformed
+
+        public void tes() throws SQLException
+    {    
+        int baris=Integer.parseInt(textFieldBaris.getText());
+        String temp1=(String)tabelDataPerpanjangan.getValueAt(baris, 0);
+        String temp2=(String)tabelDataPerpanjangan.getValueAt(baris, 1);
+        Date temp=(Date)tabelDataPerpanjangan.getValueAt(baris,2);
+        String temp3=temp.toString();
+        String temp4=(String)tabelDataPerpanjangan.getValueAt(baris, 3);
+        String temp5=(String)tabelDataPerpanjangan.getValueAt(baris, 4);
+        textFieldId.setText(temp1);
+        textFieldNama.setText(temp2);
+        textFieldTanggal.setText(temp3);
+        textFieldKuota.setText(temp4);
+        textFieldAkumulasi.setText(temp5);
+        text1=textFieldId.getText();
+        text2=textFieldNama.getText();
+        text3=textFieldTanggal.getText();
+        text4=textFieldKuota.getText();
+        text5=textFieldAkumulasi.getText();
+    }
+    
     /*
     method show buat nampilin semua isi tabel
     */
@@ -402,24 +417,7 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     yang datanya akan dirubah
     */
     public void update(String tipe, String inputTipe, String tipe2, String input)
-    {        
-        char a=input.charAt(2);
-        char b=input.charAt(5);
-        String temp="";
-        if(a=='-')
-        {            
-            temp+=input.substring(6, 10);
-            temp+=input.substring(3, 5);
-            temp+=input.substring(0, 2);
-            input=temp;
-        }
-        if(b=='-')
-        {
-            temp+=input.substring(0, 4);
-            temp+=input.substring(5, 7);
-            temp+=input.substring(8, 10);
-            input=temp;
-        }
+    {                
         try
         {
             String query="UPDATE Data_Histori SET "+tipe+"='"+inputTipe+"' where "+tipe2+"='"+input+"'";
@@ -434,6 +432,8 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonPilih;
+    private javax.swing.JButton buttonTampil;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -449,6 +449,7 @@ public class DataPerpanjanganPaketInternetUpdate2 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelDataPerpanjangan;
     private javax.swing.JTextField textFieldAkumulasi;
+    private javax.swing.JTextField textFieldBaris;
     private javax.swing.JTextField textFieldId;
     private javax.swing.JTextField textFieldKuota;
     private javax.swing.JTextField textFieldNama;
